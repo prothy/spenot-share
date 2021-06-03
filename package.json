@@ -4,7 +4,8 @@
   "description": "App to facilitate sharing music with others",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node index.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +18,12 @@
   },
   "homepage": "https://github.com/prothy/spenot-share#readme",
   "dependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/node": "^7.14.2",
+    "@babel/preset-env": "^7.14.4",
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "eslint": "^7.27.0",
-    "nodemon": "^2.0.7"
+    "eslint": "^7.27.0"
   }
 }
