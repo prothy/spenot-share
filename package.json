@@ -1,0 +1,25 @@
+{
+  "name": "spenot-share",
+  "version": "1.0.0",
+  "description": "App to facilitate sharing music with others",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prothy/spenot-share.git"
+  },
+  "author": "luka",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/prothy/spenot-share/issues"
+  },
+  "homepage": "https://github.com/prothy/spenot-share#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
