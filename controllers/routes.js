@@ -3,7 +3,9 @@ import { Router } from 'express'
 const router = Router()
 
 router.get('/', (req, res) => {
-    res.send('doodoo')
+    res.render('index')
 })
+
+router.get('/login')
 
 export default router
