@@ -2,20 +2,21 @@ import express from 'express'
 import mongoose from 'mongoose'
 import routes from './controllers/routes'
 
-const app = express()
-const port = 3000
-
-// MONGOOSE INIT
+// MONGOOSE CONFIG
 mongoose.connect('mongodb://localhost/spenot', { useNewUrlParser: true, useUnifiedTopology: true })
 
 const db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => {
-    console.log('Connection to MongoDB succeeded.')
+    console.log('succesful connection to db.')
 })
 
-// EXPRESS INIT
+
+// EXPRESS CONFIG
+const app = express()
+const port = 3000
+
 app.set('view engine', 'pug')
 app.use(express.static('static'))
 
