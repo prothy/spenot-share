@@ -9,12 +9,27 @@ registerForm.addEventListener('submit', async (ev) => {
         "password": ev.target.password.value
     })
 
-    const response = await fetch('', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        credentials: 'same-origin',
-        body: formData
-    })
+    let response;
 
-    console.log(response)
+    try {
+        response = await fetch('', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            credentials: 'same-origin',
+            body: formData
+        }).then(res => res.text())
+
+        setResponseInfo(response)
+        setTimeout(() => window.location.href = "/", 1000)
+    } catch {
+        response = 'Registration failed. Try again.'
+        setResponseInfo(response)
+    }
 })
+
+function setResponseInfo(text) {
+    const responseInfo = document.createElement('span')
+    responseInfo.innerHTML = text
+
+    registerForm.appendChild(responseInfo)
+}
