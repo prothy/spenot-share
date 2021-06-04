@@ -20,7 +20,7 @@ registerForm.addEventListener('submit', async (ev) => {
         }).then(res => res.text())
 
         setResponseInfo(response)
-        setTimeout(() => window.location.href = "/", 1000)
+        setTimeout(() => window.location.href = '/', 1000)
     } catch {
         response = 'Registration failed. Try again.'
         setResponseInfo(response)
