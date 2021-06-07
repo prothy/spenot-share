@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { MongoError } from 'mongodb'
 import { saveUser } from './db.js'
 
 const router = Router()
@@ -19,9 +20,9 @@ router.get('/register', (req, res) => {
     res.render('register')
 })
 
-router.post('/register', (req, res) => {
-    saveUser(req)
-    res.send('Successful registration! Redirecting...')
+router.post('/register', async (req, res) => {
+    const dbResponse = await saveUser(req)
+    res.status(dbResponse[0]).send(dbResponse[1])
 })
 
 export default router
