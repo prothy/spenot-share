@@ -11,24 +11,19 @@ registerForm.addEventListener('submit', async (ev) => {
 
     let response;
 
-    try {
-        response = await fetch('', {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            credentials: 'same-origin',
-            body: formData
-        }).then(res => res.text())
+    response = await fetch('', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        credentials: 'same-origin',
+        body: formData
+    })
 
-        setResponseInfo(response)
-        // setTimeout(() => window.location.href = '/', 1000)
-    } catch {
-        response = 'Registration failed. Try again.'
-        setResponseInfo(response)
-    }
+    setResponseInfo(await response.text())
+    if (await response.ok) setTimeout(() => window.location.href = '/', 1000)
 })
 
 function setResponseInfo(text) {
-    const responseInfo = document.createElement('span')
+    const responseInfo = document.querySelector('#responseinfo')
     responseInfo.innerHTML = text
 
     registerForm.appendChild(responseInfo)
