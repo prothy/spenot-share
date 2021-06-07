@@ -3,6 +3,8 @@ const loginForm = document.querySelector('.register-form')
 loginForm.addEventListener('submit', async (ev) => {
     ev.preventDefault()
 
+    console.log(ev)
+
     const formData = JSON.stringify({
         "username": ev.target.username.value,
         "password": ev.target.password.value
@@ -24,6 +26,4 @@ loginForm.addEventListener('submit', async (ev) => {
 function setResponseInfo(text) {
     const responseInfo = document.querySelector('#responseinfo')
     responseInfo.innerHTML = text
-
-    loginForm.appendChild(responseInfo)
 }

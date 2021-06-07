@@ -19,28 +19,36 @@ const User = mongoose.model('user', new mongoose.Schema({
 }), 'users')
 
 
-export function getUserLogin(req) {
+export async function checkUserLogin(req) {
+    /**
+     * Gets user login from database
+     * @param {Object} req - Request object
+     * @returns {boolean} status - Returns whether login is valid
+     */
+    const { username, password } = req.body
+
+    if (await User.exists({ $or: [{ username: username }, { email: username }] })) {
+        const userObject = await User.findOne({ $or: [{ username: username }, { email: username }] })
+        return await bcrypt.compare(password, userObject['password'])
+    }
+
     return false
-}
-
-export function usernameExists(req) {
-
 }
 
 export async function saveUser(req) {
     /**
      * Saves user data into database
-     * @param req - Request object
+     * @param {Object} req - Request object
      * @returns {Array} status - Returns a two-value array with HTTP response code and message values respectively. 
      */
 
     const { username, email, password } = req.body
 
     // check if email and username exist in database
-    if (await User.findOne({ email })) {
+    if (await User.exists({ email: email })) {
         return [400, 'E-mail already exists. Use another one.']
     }
-    if (await User.findOne({ username })) {
+    if (await User.exists({ username: username })) {
         return [400, 'Username already exists. Use another one.']
     }
 

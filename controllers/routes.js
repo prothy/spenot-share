@@ -1,6 +1,5 @@
 import { Router } from 'express'
-import { MongoError } from 'mongodb'
-import { saveUser } from './db.js'
+import { saveUser, checkUserLogin } from './db.js'
 
 const router = Router()
 
@@ -12,8 +11,9 @@ router.get('/login', (req, res) => {
     res.render('login')
 })
 
-router.post('/login', (req, res) => {
-    checkUserLogin(req)
+router.post('/login', async (req, res) => {
+    const validLogin = await checkUserLogin(req)
+    validLogin ? res.status(200).send('Successful login.') : res.status(400).send('Login unsuccessful. Try again.')
 })
 
 router.get('/register', (req, res) => {
