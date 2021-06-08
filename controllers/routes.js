@@ -13,7 +13,12 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const validLogin = await checkUserLogin(req)
-    validLogin ? res.status(200).send('Successful login.') : res.status(400).send('Login unsuccessful. Try again.')
+
+    if (validLogin) {
+        res.cookie('name', req.body.username).status(200).send('Successful login. Redirecting...')
+    } else {
+        res.status(400).send('Login unsuccessful. Try again.')
+    }
 })
 
 router.get('/register', (req, res) => {

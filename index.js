@@ -1,4 +1,6 @@
 import express from 'express'
+import session from 'express-session'
+import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 
 import routes from './controllers/routes'
@@ -13,7 +15,6 @@ db.once('open', () => {
     console.log('succesful connection to db.')
 })
 
-
 // EXPRESS CONFIG
 const app = express()
 const port = 3000
@@ -25,6 +26,8 @@ app.use(express.urlencoded({
     extended: true
 }))
 app.use(express.json())
+app.use(session({ secret: 'krumpli', resave: true, saveUninitialized: true }))
+app.use(cookieParser())
 
 app.use(routes)
 
