@@ -8,16 +8,5 @@ block head
 
 block content 
     article(class="register-page content")
-        form(class="register-form")
-            label(for="username") Username: 
-            input(type="text", name="username")
-
-            label(for="email") E-mail:
-            input(type="email", name="email")
-
-            label(for="password") Password: 
-            input(type="password", name="password")
-
-            input(type="submit", value="Register")
-
-            span(id="responseinfo")
+        span= user.username
+        a(href="/redirect/spotify") Da spotify link bish

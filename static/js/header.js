@@ -1,7 +1,7 @@
 const username = getUsernameFromCookie()
 
 if (username) {
-    document.querySelector('.header-links').innerHTML = `<span>Welcome, ${username}.</span> <a href='/logout'>Logout</a>`
+    document.querySelector('.header-links').innerHTML = `<span>Welcome, <a href="/user/${username}">${username}</a>.</span> <a href='/logout'>Logout</a>`
 }
 
 function getUsernameFromCookie() {

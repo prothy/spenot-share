@@ -15,6 +15,9 @@ const User = mongoose.model('user', new mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    created: {
+        type: Date
     }
 }), 'users')
 
@@ -58,7 +61,8 @@ export async function saveUser(req) {
     const user = new User({
         username: username,
         email: email,
-        password: await bcrypt.hash(password, 10)
+        password: await bcrypt.hash(password, 10),
+        created: Date.now()
     })
 
     try {
