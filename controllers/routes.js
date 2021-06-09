@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import { saveUser, checkUserLogin } from './db.js'
+import { render } from 'pug'
+import { saveUser, checkUserLogin, getUserByName } from './db.js'
 
 const router = Router()
 
@@ -7,6 +8,8 @@ router.get('/', (req, res) => {
     res.render('index')
 })
 
+
+/* LOGIN/REGISTER ROUTES */
 router.get('/login', (req, res) => {
     res.render('login')
 })
@@ -28,6 +31,18 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
     const dbResponse = await saveUser(req)
     res.status(dbResponse[0]).send(dbResponse[1])
+})
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('name')
+    res.redirect('/')
+})
+
+
+/* USER ROUTING */
+router.get('/user/:username', async (req, res) => {
+    const user = await getUserByName(req.params.username)
+    res.render('index', user)
 })
 
 export default router

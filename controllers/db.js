@@ -19,12 +19,16 @@ const User = mongoose.model('user', new mongoose.Schema({
 }), 'users')
 
 
+export async function getUserByName(name) {
+    return await User.findOne({ username: name })
+}
+
+/**
+ * Gets user login from database
+ * @param {object} req request object
+ * @returns {boolean} status whether login is valid
+ */
 export async function checkUserLogin(req) {
-    /**
-     * Gets user login from database
-     * @param {Object} req - Request object
-     * @returns {boolean} status - Returns whether login is valid
-     */
     const { username, password } = req.body
 
     if (await User.exists({ $or: [{ username: username }, { email: username }] })) {
@@ -35,13 +39,12 @@ export async function checkUserLogin(req) {
     return false
 }
 
+/**
+ * Saves user data into database
+ * @param {object} req request object
+ * @returns {[number, string]} two-value array with HTTP response code and message values respectively. 
+ */
 export async function saveUser(req) {
-    /**
-     * Saves user data into database
-     * @param {Object} req - Request object
-     * @returns {Array} status - Returns a two-value array with HTTP response code and message values respectively. 
-     */
-
     const { username, email, password } = req.body
 
     // check if email and username exist in database
