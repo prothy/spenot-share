@@ -5,6 +5,7 @@ loginForm.addEventListener('submit', async (ev) => {
 
     const formData = JSON.stringify({
         "username": ev.target.username.value,
+        "email": ev.target.email.value,
         "password": ev.target.password.value
     })
 

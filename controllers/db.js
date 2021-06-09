@@ -18,12 +18,20 @@ const User = mongoose.model('user', new mongoose.Schema({
     },
     created: {
         type: Date
+    },
+    spotify: {
+        type: String
     }
 }), 'users')
 
 
 export async function getUserByName(name) {
     return await User.findOne({ username: name })
+}
+
+
+export async function saveSpotifyToUser(name, code) {
+    await User.updateOne({ username: name }, { $set: { spotify: code } })
 }
 
 /**
@@ -50,6 +58,8 @@ export async function checkUserLogin(req) {
 export async function saveUser(req) {
     const { username, email, password } = req.body
 
+    console.log(req.body)
+
     // check if email and username exist in database
     if (await User.exists({ email: email })) {
         return [400, 'E-mail already exists. Use another one.']
@@ -62,7 +72,8 @@ export async function saveUser(req) {
         username: username,
         email: email,
         password: await bcrypt.hash(password, 10),
-        created: Date.now()
+        created: Date.now(),
+        spotify: undefined
     })
 
     try {

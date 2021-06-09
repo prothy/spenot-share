@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { render } from 'pug'
-import { saveUser, checkUserLogin, getUserByName } from './db.js'
+import { saveUser, checkUserLogin, getUserByName, saveSpotifyToUser } from './db.js'
 
 const router = Router()
 
@@ -44,13 +44,14 @@ router.get('/logout', (req, res) => {
 router.get('/redirect/spotify', (req, res) => {
     const scopes = 'playlist-modify-public playlist-modify-private playlist-read-private'
     const client_id = '1a684c820d244310807c3d717204e049'
-    const redirect_uri = 'http://localhost:3000/'
+    const redirect_uri = 'http://localhost:3000/authorize/spotify'
 
     res.redirect(`https://accounts.spotify.com/authorize?response_type=code&client_id=${client_id}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirect_uri)}`);
 })
 
-router.get('/authorize/spotify', (req, res) => {
-
+router.get('/authorize/spotify', async (req, res) => {
+    await saveSpotifyToUser(req.cookies.name, req.query.code)
+    res.redirect('/')
 })
 
 
