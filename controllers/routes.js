@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import { render } from 'pug'
+import { post } from 'axios'
+import qs from 'qs';
 import { saveUser, checkUserLogin, getUserByName, saveSpotifyToUser } from './db.js'
 
 const router = Router()
@@ -59,6 +60,31 @@ router.get('/authorize/spotify', async (req, res) => {
 router.get('/user/:username', async (req, res) => {
     const user = await getUserByName(req.params.username)
     const isCurrentUser = req.params.username === req.session.username
+
+    const headers = {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        auth: {
+            username: process.env.CLIENT_ID,
+            password: process.env.CLIENT_SECRET
+        }
+    }
+
+    const data = {
+        grant_type: 'client_credentials'
+    }
+
+    try {
+        const spotifyToken = await post(
+            'https://accounts.spotify.com/api/token',
+            qs.stringify(data),
+            headers
+        )
+    } catch (error) {
+        console.error(error)
+    }
 
     res.render('user', { user, isCurrentUser })
 })

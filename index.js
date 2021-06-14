@@ -2,6 +2,9 @@ import express from 'express'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 import routes from './controllers/routes'
 
