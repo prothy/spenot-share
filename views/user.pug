@@ -8,5 +8,8 @@ block head
 
 block content 
     article(class="register-page content")
-        span= user.username
-        a(href="/redirect/spotify") Da spotify link bish
+        h2 #{displayname}'s page
+        div
+            h5 Share a song!
+            div 
+                input(type="text", placeholder="Enter spotify url")
