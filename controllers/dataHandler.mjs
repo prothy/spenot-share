@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const User = mongoose.model('user', new mongoose.Schema({
-    userId: {
+    user_id: {
         type: String,
         required: true
     },
@@ -26,7 +26,7 @@ export default {
 
         try {
             await new User({
-                userId: userInfo.id,
+                user_id: userInfo.id,
                 display_name: userInfo.display_name,
                 access_token: auth.access_token,
                 refresh_token: auth.refresh_token
