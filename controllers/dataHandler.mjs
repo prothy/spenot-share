@@ -1,6 +1,14 @@
 import mongoose from 'mongoose'
 
 const User = mongoose.model('user', new mongoose.Schema({
+    userId: {
+        type: String,
+        required: true
+    },
+    display_name: {
+        type: String,
+        required: true
+    },
     access_token: {
         type: String,
         required: true
@@ -13,13 +21,15 @@ const User = mongoose.model('user', new mongoose.Schema({
 
 
 export default {
-    verifyUser: async function (accessToken, refreshToken) {
-        if (await User.exists({ refresh_token: refreshToken })) return true
+    verifyUser: async function (auth, userInfo) {
+        if (await User.exists({ userId: userInfo.id })) return true
 
         try {
             await new User({
-                access_token: accessToken,
-                refresh_token: refreshToken
+                userId: userInfo.id,
+                display_name: userInfo.display_name,
+                access_token: auth.access_token,
+                refresh_token: auth.refresh_token
             }).save()
             return true
         } catch {
