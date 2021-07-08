@@ -6,8 +6,7 @@ import spotifyHelper from './spotifyHelper.mjs'
 const router = Router()
 
 router.get('/', (req, res) => {
-    if (req.cookies.name && !req.session.username) req.session.username = req.cookies.name
-    res.render('index')
+    res.render('index', { username: req.session.username })
 })
 
 /* LOGIN/REGISTER ROUTES */
@@ -31,10 +30,9 @@ router.get('/redirect/spotify', (req, res) => {
 
 router.get('/authorize/spotify', async (req, res) => {
     const auth = await spotifyHelper.getSpotifyAuthentication(req.query.code).catch(e => console.log(e.response))
-    console.log(auth.data)
     const userInfo = await spotifyHelper.getSpotifyUserInfo(auth.data.access_token).catch(e => console.log(e.response))
     dataHandler.verifyUser(auth.data, userInfo.data)
-    console.log(userInfo)
+    req.session.username = userInfo.data.id
     req.session.accessToken = auth.data.access_token
     res.redirect('/')
 })
@@ -45,10 +43,8 @@ router.get('/user/:username', async (req, res) => {
     const user = await dataHandler.getUserByName(req.params.username)
     const isCurrentUser = req.params.username === req.session.username
 
-    // console.log(user.spotify.access_token)
-    // console.log(await getSpotifyUserPlaylists(user.spotify.access_token).catch(e => console.log(e.data)))
-
-    res.render('user', { user, isCurrentUser })
+    console.log(user)
+    res.render('user', { username: req.session.username, displayname: user.display_name, isCurrentUser })
 })
 
 export default router

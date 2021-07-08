@@ -1,5 +1,3 @@
-const username = getUsernameFromCookie()
-
 if (username) {
     document.querySelector('.header-links').innerHTML = `<span>Welcome, <a href="/user/${username}">${username}</a>.</span> <a href='/logout'>Logout</a>`
 }

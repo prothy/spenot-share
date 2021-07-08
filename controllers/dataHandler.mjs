@@ -40,7 +40,7 @@ export default {
         await User.updateOne({ refresh_token: refreshToken }, { $set: { access_token: accessToken } })
     },
     getUserByName: async function (name) {
-        return await User.findOne({ username: name })
+        return await User.findOne({ user_id: name })
     }
 }
 
