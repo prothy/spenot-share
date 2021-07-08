@@ -1,31 +1,34 @@
 import mongoose from 'mongoose'
-import bcrypt from 'bcrypt'
 
 const User = mongoose.model('user', new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        lowercase: true
-    },
-    email: {
-        type: String,
-        required: true,
-        lowercase: true
-    },
-    password: {
+    access_token: {
         type: String,
         required: true
     },
-    created: {
-        type: Date
-    },
-    spotify: {
-        type: Object
+    refresh_token: {
+        type: String,
+        required: true
     }
 }), 'users')
 
 
 export default {
+    verifyUser: async function (accessToken, refreshToken) {
+        if (await User.exists({ refresh_token: refreshToken })) return true
+
+        try {
+            await new User({
+                access_token: accessToken,
+                refresh_token: refreshToken
+            }).save()
+            return true
+        } catch {
+            return false
+        }
+    },
+    updateAccessToken: async function (accessToken, refreshToken) {
+        await User.updateOne({ refresh_token: refreshToken }, { $set: { access_token: accessToken } })
+    },
     getUserByName: async function (name) {
         return await User.findOne({ username: name })
     }

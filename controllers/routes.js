@@ -32,6 +32,7 @@ router.get('/redirect/spotify', (req, res) => {
 router.get('/authorize/spotify', async (req, res) => {
     const auth = await spotifyHelper.getSpotifyAuthentication(req.query.code).catch(e => console.log(e.response))
     console.log(auth.data)
+    dataHandler.verifyUser(auth.data.access_token, auth.data.refresh_token)
     res.redirect('/')
 })
 
