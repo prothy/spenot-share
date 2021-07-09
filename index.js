@@ -29,7 +29,11 @@ app.use(express.urlencoded({
     extended: true
 }))
 app.use(express.json())
-app.use(session({ secret: 'krumpli', resave: true, saveUninitialized: true }))
+app.use(session({
+    secret: 'krumpli', resave: true, saveUninitialized: true, cookie: {
+        maxAge: 30 * 24 * 60 * 60 * 1000
+    }
+}))
 app.use(cookieParser())
 
 app.use(routes)
