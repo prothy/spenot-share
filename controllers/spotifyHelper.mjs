@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const appAuthorization = Buffer.from(`${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`).toString('base64')
+
 export default {
     getSpotifyAuthentication: async function (accessCode) {
         return await axios({
@@ -17,21 +19,30 @@ export default {
             }
         })
     },
-    getSpotifyUserInfo: async function (authToken) {
+    getSpotifyUserInfo: async function (accessToken) {
         return await axios({
             method: 'get',
             url: 'https://api.spotify.com/v1/me',
             headers: {
-                'Authorization': `Bearer ${authToken}`
+                'Authorization': `Bearer ${accessToken}`
             }
         })
     },
-    getSpotifyUserPlaylists: async function (authToken) {
+    getSpotifyUserPlaylists: async function (accessToken) {
         return await axios({
             method: 'get',
             url: 'https://api.spotify.com/v1/me/playlists',
             headers: {
-                'Authorization': `Bearer ${authToken}`
+                'Authorization': `Bearer ${accessToken}`
+            }
+        })
+    },
+    getSongById: async function (songId, accessToken) {
+        return await axios({
+            method: 'get',
+            url: 'https://api.spotify.com/v1/tracks/' + songId,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`
             }
         })
     }
