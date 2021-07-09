@@ -47,16 +47,20 @@ export default {
         })
     },
     getNewAccessToken: async function (refreshToken) {
-        return await axios({
+        const response = await axios({
             method: 'post',
             url: 'https://accounts.spotify.com/api/token',
             headers: {
-                'Authorization': `Bearer ${appAuthorization}`
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
             params: {
                 'grant_type': 'refresh_token',
-                'refresh_token': refreshToken
+                'refresh_token': refreshToken,
+                'client_id': process.env.CLIENT_ID,
+                'client_secret': process.env.CLIENT_SECRET
             }
         })
+
+        return response.data.access_token
     }
 }
