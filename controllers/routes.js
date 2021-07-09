@@ -41,6 +41,7 @@ router.get('/authorize/spotify', async (req, res) => {
 
 /* USER ROUTING */
 router.get('/user/:username', async (req, res) => {
+    await dataHandler.updateAccessToken(req.params.username)
     const user = await dataHandler.getUserByName(req.params.username)
     const isCurrentUser = req.params.username === req.session.username
 
@@ -51,10 +52,9 @@ router.get('/user/:username', async (req, res) => {
 
 /* FETCH ROUTES */
 router.get('/fetch/song/:songId', async (req, res) => {
-    console.log(req.session)
-    const songInfo = await spotifyHelper.getSongById(req.params.songId, req.session.accessToken).catch(e => console.log(e.response.data))
+    const songInfo = await spotifyHelper.getSongById(req.params.songId, req.session.accessToken).catch(e => console.log(`Error getting song by id (${JSON.stringify(e.response.data.error)})`))
     console.log(songInfo)
-    res.json(songInfo)
+    res.json(songInfo.data)
 })
 
 export default router
