@@ -45,5 +45,18 @@ export default {
                 'Authorization': `Bearer ${accessToken}`
             }
         })
+    },
+    getNewAccessToken: async function (refreshToken) {
+        return await axios({
+            method: 'post',
+            url: 'https://accounts.spotify.com/api/token',
+            headers: {
+                'Authorization': `Bearer ${appAuthorization}`
+            },
+            params: {
+                'grant_type': 'refresh_token',
+                'refresh_token': refreshToken
+            }
+        })
     }
 }
