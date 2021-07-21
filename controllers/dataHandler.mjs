@@ -17,6 +17,10 @@ const User = mongoose.model('user', new mongoose.Schema({
     refresh_token: {
         type: String,
         required: true
+    },
+    playlist_id: {
+        type: String,
+        required: true
     }
 }), 'users')
 
@@ -37,12 +41,14 @@ export default {
             return false
         }
     },
+
     updateAccessToken: async function (userId) {
         const user = await this.getUserByName(userId)
         const refreshToken = user.refresh_token
         const accessToken = await spotifyHelper.getNewAccessToken(refreshToken).catch(e => console.log(`Error when fetching new access token (${e.response.data.error})`))
         await User.updateOne({ user_id: userId }, { $set: { access_token: accessToken } })
     },
+
     getUserByName: async function (userId) {
         return await User.findOne({ user_id: userId })
     }
