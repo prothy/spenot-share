@@ -19,8 +19,7 @@ const User = mongoose.model('user', new mongoose.Schema({
         required: true
     },
     playlist_id: {
-        type: String,
-        required: true
+        type: String
     }
 }), 'users')
 
@@ -51,5 +50,9 @@ export default {
 
     getUserByName: async function (userId) {
         return await User.findOne({ user_id: userId })
+    },
+
+    setPlaylistId: async function (userId, playlistId) {
+        await User.updateOne({ user_id: userId }, { $set: { playlist_id: playlistId } })
     }
 }
