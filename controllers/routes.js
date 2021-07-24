@@ -32,7 +32,9 @@ router.get('/redirect/spotify', (req, res) => {
 router.get('/authorize/spotify', async (req, res) => {
     const auth = await spotifyHelper.getSpotifyAuthentication(req.query.code).catch(e => console.log(e.response.data))
     const userInfo = await spotifyHelper.getSpotifyUserInfo(auth.data.access_token).catch(e => console.log(e.response.data))
+
     dataHandler.verifyUser(auth.data, userInfo.data)
+
     req.session.username = userInfo.data.id
     req.session.accessToken = auth.data.access_token
     res.redirect('/')
@@ -45,7 +47,10 @@ router.get('/user/:username', async (req, res) => {
     const user = await dataHandler.getUserByName(req.params.username)
     const isCurrentUser = req.params.username === req.session.username
 
+    await spotifyHelper.handleUserPlaylist(user).catch(e => console.log(e.response.data))
+
     req.session.accessToken = user.access_token
+    req.session.playlistId = user.playlist_id
 
     res.render('user', { username: req.session.username, displayname: user.display_name, isCurrentUser })
 })
@@ -53,8 +58,13 @@ router.get('/user/:username', async (req, res) => {
 /* FETCH ROUTES */
 router.get('/fetch/song/:songId', async (req, res) => {
     const songInfo = await spotifyHelper.getSongById(req.params.songId, req.session.accessToken).catch(e => console.log(`Error getting song by id (${JSON.stringify(e.response.data.error)})`))
-    console.log(songInfo)
+    // console.log(songInfo)
+    await spotifyHelper.addSongToPlaylist(req.session.playlistId, req.session.accessToken, req.body.songUri)
     res.json(songInfo.data)
+})
+
+router.post('/fetch/add-song', async (req, res) => {
+
 })
 
 export default router

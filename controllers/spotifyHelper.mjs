@@ -1,4 +1,5 @@
 import axios from "axios";
+import dataHandler from "./dataHandler.mjs";
 
 const appAuthorization = Buffer.from(`${process.env.CLIENT_ID}:${process.env.CLIENT_SECRET}`).toString('base64')
 
@@ -19,6 +20,7 @@ export default {
             }
         })
     },
+
     getSpotifyUserInfo: async function (accessToken) {
         return await axios({
             method: 'get',
@@ -28,6 +30,7 @@ export default {
             }
         })
     },
+
     getSpotifyUserPlaylists: async function (accessToken) {
         return await axios({
             method: 'get',
@@ -37,6 +40,7 @@ export default {
             }
         })
     },
+
     getSongById: async function (songId, accessToken) {
         return await axios({
             method: 'get',
@@ -46,6 +50,7 @@ export default {
             }
         })
     },
+
     getNewAccessToken: async function (refreshToken) {
         const response = await axios({
             method: 'post',
@@ -62,5 +67,47 @@ export default {
         })
 
         return response.data.access_token
+    },
+
+    handleUserPlaylist: async function (user) {
+        if (!user.playlist_id) {
+            const response = await axios({
+                method: 'post',
+                url: `https://api.spotify.com/v1/users/${user.user_id}/playlists`,
+                headers: {
+                    'Authorization': `Bearer ${user.access_token}`,
+                    'Content-Type': 'application/json'
+                },
+                params: {
+                    'user_id': user.user_id
+                },
+                data: {
+                    'name': 'Songs shared with me',
+                    'description': 'Generated with Luka\'s spotify tool'
+                }
+            })
+
+            await dataHandler.setPlaylistId(user.user_id, response.data.id)
+        }
+    },
+
+    addSongToPlaylist: async function (playlistId, accessToken, songUri) {
+        const response = await axios({
+            method: 'post',
+            url: `https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+            headers: {
+                'Authorization': `Bearer ${accessToken}`,
+                'Content-Type': 'application/json'
+            },
+            params: {
+                'playlist_id': playlistId
+            },
+            data: {
+                uris: `spotify:track:${songUri}`
+            }
+        }).catch(e => console.log(e.response.data))
+
+        console.log(response);
     }
+
 }

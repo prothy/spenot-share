@@ -1,6 +1,10 @@
 import mongoose from 'mongoose'
 import spotifyHelper from './spotifyHelper.mjs'
 
+/**
+ * Snake case is used in database to conform to spotify's convention, 
+ * camel case is used everywhere else.
+ */
 const User = mongoose.model('user', new mongoose.Schema({
     user_id: {
         type: String,
