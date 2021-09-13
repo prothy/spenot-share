@@ -10,6 +10,13 @@ router.get('/', (req, res) => {
     res.render('index', { username: req.session.username })
 })
 
+/* API ROUTES */
+router.get('/api/react-test', (req, res) => {
+    res.json({
+        data: 'test'
+    })
+})
+
 /* LOGIN/REGISTER ROUTES */
 router.get('/login', (req, res) => {
     res.render('login')

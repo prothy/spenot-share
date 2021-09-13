@@ -13,6 +13,7 @@
   },
   "author": "luka",
   "license": "MIT",
+  "proxy": "3000",
   "bugs": {
     "url": "https://github.com/prothy/spenot-share/issues"
   },
