@@ -37,7 +37,7 @@ router.get('/authorize/spotify', async (req, res) => {
 
     req.session.username = userInfo.data.id
     req.session.accessToken = auth.data.access_token
-    res.redirect('http://localhost:3000/')
+    res.send('<script>window.close()</script>')
 })
 
 
