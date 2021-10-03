@@ -10,13 +10,6 @@ router.get('/', (req, res) => {
     res.render('index', { username: req.session.username })
 })
 
-/* REACT API  */
-router.get('/api/react-test', (req, res) => {
-    res.json({
-        data: 'test'
-    })
-})
-
 /* LOGIN/REGISTER ROUTES */
 router.get('/login', (req, res) => {
     res.render('login')
@@ -31,7 +24,7 @@ router.get('/logout', (req, res) => {
 router.get('/redirect/spotify', (req, res) => {
     const scopes = 'playlist-modify-public playlist-modify-private playlist-read-private user-read-email user-read-private'
     const client_id = process.env.CLIENT_ID
-    const redirect_uri = 'http://localhost:3000/authorize/spotify'
+    const redirect_uri = process.env.SPOTIFY_REDIRECT_URI
 
     res.redirect(`https://accounts.spotify.com/authorize?response_type=code&client_id=${client_id}&scope=${encodeURIComponent(scopes)}&redirect_uri=${encodeURIComponent(redirect_uri)}`);
 })
@@ -44,7 +37,7 @@ router.get('/authorize/spotify', async (req, res) => {
 
     req.session.username = userInfo.data.id
     req.session.accessToken = auth.data.access_token
-    res.redirect('/')
+    res.redirect('http://localhost:3000/')
 })
 
 

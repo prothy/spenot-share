@@ -14,7 +14,7 @@ export default {
             params: {
                 'grant_type': 'authorization_code',
                 'code': accessCode,
-                'redirect_uri': 'http://localhost:3000/authorize/spotify',
+                'redirect_uri': process.env.SPOTIFY_REDIRECT_URI,
                 'client_id': process.env.CLIENT_ID,
                 'client_secret': process.env.CLIENT_SECRET
             }
