@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import Header from './Header.jsx'
 import Sidebar from './Header.jsx'
@@ -14,7 +14,7 @@ const User = () => {
             </main>
             
         </>
-    );
+    )
 }
 
-export default User;
+export default User
