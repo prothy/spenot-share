@@ -1,11 +1,12 @@
-import React from 'react';
+import React from 'react'
+import LoginButton from './LoginButton.jsx'
 
 const Login = () => {
     return (
-        <div>
-            Login
-        </div>
-    );
+        <main>
+            <LoginButton />
+        </main>
+    )
 }
 
-export default Login;
+export default Login
