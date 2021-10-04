@@ -3,11 +3,16 @@ import { useHistory } from 'react-router'
 
 const LoginButton = () => {
     const history = useHistory()
-    
+    const ws = new WebSocket('ws://localhost:5000')
+
     useEffect(() => {
-        window.addEventListener('message', () => {
-            history.push('/user/0')
-        })
+        ws.onopen = () => {
+            console.log('connected to server')
+        }
+        
+        ws.onmessage = message => {
+            if (message === 'redirect') history.push('/user/0')
+        }
     })
 
     const loginToSpotify = (event) => {

@@ -2,11 +2,13 @@ import express from 'express'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
+import WebSocket from 'ws'
+
 if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config({path: './.env'});
+    require('dotenv').config({path: './.env'})
 }
 
-import routes from './controllers/routes'
+import routes from './lib/router'
 
 // MONGOOSE CONFIG
 mongoose.connect('mongodb://localhost/spenot', { useNewUrlParser: true, useUnifiedTopology: true })
@@ -15,7 +17,7 @@ const db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => {
-    console.log('succesful connection to db.')
+    console.log(`[${new Date().toUTCString()}] succesful connection to db`)
 })
 
 // EXPRESS CONFIG
@@ -31,13 +33,21 @@ app.use(express.urlencoded({
 app.use(express.json())
 app.use(session({
     secret: 'krumpli', resave: true, saveUninitialized: true, cookie: {
-        maxAge: 30 * 24 * 60 * 60 * 1000
+        maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
     }
 }))
 app.use(cookieParser())
 
 app.use(routes)
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`)
+const server = app.listen(port, () => {
+    console.log(`[${new Date().toUTCString()}] listening on port ${port}`)
+})
+
+// WEBSOCKET SETUP
+const wss = new WebSocket.Server({ server: server })
+
+wss.on('connection', ws => {
+    console.log(`[${new Date().toUTCString()}] successfully connected websocket server`)
+    ws.emit('redirect')
 })
