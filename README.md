@@ -6,4 +6,4 @@ I am planning to implement the following:
   - A contacts list, where you can add users by their spotify ID
   - A wall, to which anyone can post music (maybe the option to have some sort of privacy settings)
   - Implement web sockets to be used on the wall, so it also functions as a kind of chat
-  - Create a PWA app out of it, because it might naturally be used most frequently on phones
+  - Create a PWA out of it, because it might naturally be used most frequently on phones
