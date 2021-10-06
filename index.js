@@ -1,6 +1,5 @@
 import express from 'express'
 import session from 'express-session'
-import cookieParser from 'cookie-parser'
 import mongoose from 'mongoose'
 import WebSocket from 'ws'
 
@@ -36,7 +35,6 @@ app.use(session({
         maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
     }
 }))
-app.use(cookieParser())
 
 app.use(routes)
 
