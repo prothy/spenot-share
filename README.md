@@ -7,3 +7,7 @@ I am planning to implement the following:
   - A wall, to which anyone can post music (maybe the option to have some sort of privacy settings)
   - Implement web sockets to be used on the wall, so it also functions as a kind of chat
   - Create a PWA out of it, because it might naturally be used most frequently on phones
+
+Below is a basic design/mockup for the chat part of the app, which I created in Figma:
+
+<img alt="Basic mockup of chat part" src="https://raw.githubusercontent.com/prothy/spenot-share/main/docs/spenot-desktop.png" width=500 height=auto>
