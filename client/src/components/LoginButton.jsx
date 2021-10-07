@@ -1,10 +1,12 @@
 import React from 'react'
 
+import './css/LoginButton.scss'
+
 const LoginButton = () => {
     // TODO: use websockets to open in new tab
     
     return (
-        <a href={process.env.REACT_APP_SERVER_URL + '/redirect/spotify'}>Connect to Spotify</a>
+        <a className="btn btn-login" href={process.env.REACT_APP_SERVER_URL + '/redirect/spotify'}>Connect to Spotify</a>
     )
 }
 
