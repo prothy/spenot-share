@@ -1,32 +1,10 @@
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router'
+import React from 'react'
 
 const LoginButton = () => {
-    const history = useHistory()
-    const ws = new WebSocket('ws://localhost:5000')
-
-    useEffect(() => {
-        ws.onopen = () => {
-            console.log('connected to server')
-        }
-        
-        ws.onmessage = message => {
-            if (message === 'redirect') history.push('/user/0')
-        }
-    })
-
-    const loginToSpotify = (event) => {
-        const button = event.target
-        button.value = 'Waiting...'
-        window.open('http://localhost:5000/redirect/spotify')
-    }
+    // TODO: use websockets to open in new tab
     
     return (
-        <input type="button" 
-            id="spotify-login-button" 
-            value="Log into Spotify" 
-            onClick={loginToSpotify}
-        />
+        <a href={process.env.REACT_APP_SERVER_URL + '/redirect/spotify'}>Connect to Spotify</a>
     )
 }
 
