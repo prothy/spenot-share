@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Message from './Message.jsx'
 import SongInput from './SongInput.jsx'
 
-import './css/Chat.css'
+import './css/Chat.scss'
 
 const Chat = () => {
     const history = useHistory()

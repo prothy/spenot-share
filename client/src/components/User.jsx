@@ -1,13 +1,15 @@
 import React from 'react'
 
-import Header from './Header.jsx'
-import Sidebar from './Header.jsx'
+import ChatHeader from './ChatHeader.jsx'
+import Sidebar from './ChatHeader.jsx'
 import Chat from './Chat'
+
+import './css/User.scss'
 
 const User = () => {
     return (
         <>
-            <Header />
+            <ChatHeader />
             <main>
                 <Sidebar />
                 <Chat />
