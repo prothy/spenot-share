@@ -20,7 +20,10 @@ const Chat = () => {
             <section className="msg-list">
                 {messages.map(e => <Message content={e} />)}
             </section>
-            <SongInput />
+            <div className="chat-input">
+                <SongInput />
+                <button className="btn">Send</button>
+            </div>
         </article>
     )
 }

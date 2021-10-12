@@ -1,6 +1,6 @@
 @import './_variables.scss';
 
-:root {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -51,6 +51,8 @@ header {
 
   background: var(--blue);
   color: white;
+
+  border: 1px solid var(--medium-grey);
 
   &:hover {
     background: #65dbff;
