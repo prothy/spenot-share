@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState } from 'react'
+import React, {useCallback, useLayoutEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 
 import Header from './Header.jsx'
@@ -26,14 +26,14 @@ const User = () => {
 
 
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         getCurrentUser()
     }, [currentUser, getCurrentUser])
 
     return (
         <>
             <Header>
-                <ChatHeader user={currentUser} />
+                <ChatHeader user={currentUser}></ChatHeader>
             </Header>
             <main>
                 <Sidebar />
