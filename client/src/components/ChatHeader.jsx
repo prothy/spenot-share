@@ -1,10 +1,12 @@
 import React from 'react'
 
-const ChatHeader = () => {
+const ChatHeader = ({user}) => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <span>
+                {user}
+            </span>
+        </>
     )
 }
 
