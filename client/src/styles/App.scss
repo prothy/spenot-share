@@ -1,11 +1,9 @@
+@import './_variables.scss';
+
 :root {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
-  --blue: #00C2FF;
-  --medium-grey: #b8b5b5;
-  --dark-grey: #818181;
 }
 
 body {

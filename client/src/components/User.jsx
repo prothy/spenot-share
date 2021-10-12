@@ -6,7 +6,7 @@ import ChatHeader from './ChatHeader.jsx'
 import Sidebar from './ChatHeader.jsx'
 import Chat from './Chat'
 
-import './css/User.scss'
+import '../styles/components/User.scss'
 
 const User = () => {
     const history = useHistory()
@@ -35,7 +35,7 @@ const User = () => {
             <Header>
                 <ChatHeader user={currentUser}></ChatHeader>
             </Header>
-            <main>
+            <main className="chat">
                 <Sidebar />
                 <Chat />
             </main>

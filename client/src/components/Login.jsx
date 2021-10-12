@@ -1,16 +1,19 @@
 import React from 'react'
 
-import LoginButton from './LoginButton.jsx'
-import LoginHeader from './LoginHeader.jsx'
+import Header from './Header.jsx'
 
-import './css/Login.scss'
+import '../styles/components/Login.scss'
+import LoginButton from './LoginButton'
 
 const Login = () => {
 
     return (
         <main>
-            <LoginHeader />
-            <LoginButton />
+            <Header />
+            <article className="login-welcome-text">
+                <p>Welcome to this spotify song share app thing. Connect to your spotify account to begin.</p>
+                <LoginButton />
+            </article>
         </main>
     )
 }

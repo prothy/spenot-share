@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react'
 import Message from './Message.jsx'
 import SongInput from './SongInput.jsx'
 
-import './css/Chat.scss'
+import '../styles/components/Chat.scss'
 
 const Chat = () => {
     const [messages, setMessages] = useState([])

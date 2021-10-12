@@ -5,7 +5,7 @@ import {
     Route
 } from 'react-router-dom'
 
-import './App.scss'
+import './styles/App.scss'
 
 import Login from './components/Login.jsx'
 import User from './components/User.jsx'
