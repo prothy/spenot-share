@@ -15,8 +15,19 @@ body {
 /* HEADER */
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   padding: 2rem;
 
+  border-bottom: 10px solid var(--blue);
+}
+
+.hdr-title {
+  display: inline-block;
+
+  color: var(--medium-grey);
 
   text-transform: uppercase;
 
@@ -25,8 +36,8 @@ header {
   font-style: italic;
 }
 
-.hdr-title {
-  color: var(--medium-grey);
+.hdr-username {
+  color: var(--blue);
 }
 
 /* PAGE ELEMENTS */
