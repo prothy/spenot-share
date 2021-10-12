@@ -5,7 +5,7 @@ const ChatHeader = ({user}) => {
         console.log('hello im doing something')
     }
 
-    return user ? 
+    return(
         <span>
             <span>
                 <span>Hello, </span>
@@ -14,7 +14,7 @@ const ChatHeader = ({user}) => {
                 </span>.
             </span>
             <button className="logout-btn hdr-btn" onClick={logoutUser}>Logout</button>
-        </span> : <span></span>
+        </span>)
     
 }
 

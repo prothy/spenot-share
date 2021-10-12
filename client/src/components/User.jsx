@@ -1,9 +1,9 @@
-import React, {useCallback, useLayoutEffect, useState } from 'react'
+import React, {useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 
 import Header from './Header.jsx'
 import ChatHeader from './ChatHeader.jsx'
-import Sidebar from './ChatHeader.jsx'
+import Sidebar from './Sidebar.jsx'
 import Chat from './Chat'
 
 import '../styles/components/User.scss'
@@ -24,21 +24,19 @@ const User = () => {
         userObj.username ? setCurrentUser(userObj.username) : history.push('/')
     }, [history])
 
-
-
-    useLayoutEffect(() => {
+    useEffect(() => {
         getCurrentUser()
     }, [currentUser, getCurrentUser])
 
     return (
         <>
             <Header>
-                <ChatHeader user={currentUser}></ChatHeader>
+                <ChatHeader user={currentUser} />
             </Header>
-            <main className="chat">
+            <div className="chat">
                 <Sidebar />
                 <Chat />
-            </main>
+            </div>
             
         </>
     )
