@@ -11,12 +11,11 @@ import Login from './components/Login.jsx'
 import User from './components/User.jsx'
 
 function App() {
-
     return (
         <Router>
             <Switch>
                 <Route path="/user/:id">
-                    <User />
+                    <User/>
                 </Route>
                 <Route path="/">
                     <Login />
