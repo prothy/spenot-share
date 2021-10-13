@@ -4,8 +4,10 @@ import SongInput from './SongInput.jsx'
 
 import '../styles/components/Chat.scss'
 
-const Chat = () => {
+const Chat = ({user}) => {
     const [messages, setMessages] = useState([])
+
+    const [inputValue, setInputValue] = useState('')
 
     useEffect(() => {
         const messageList = [
@@ -21,7 +23,7 @@ const Chat = () => {
                 {messages.map(e => <Message content={e} />)}
             </section>
             <div className="chat-input">
-                <SongInput />
+                <SongInput val={{inputValue, setInputValue}} />
                 <button className="btn">Send</button>
             </div>
         </article>
