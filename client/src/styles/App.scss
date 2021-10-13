@@ -8,6 +8,17 @@
 
 body {
   background: var(--dark-grey);
+
+  height: 100vh;
+}
+
+#root {
+  display: grid;
+  grid-template-rows: 10rem 1fr;
+
+  height: 100%;
+
+  padding-bottom: 10rem;
 }
 
 /* HEADER */
