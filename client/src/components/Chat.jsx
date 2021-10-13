@@ -6,16 +6,28 @@ import '../styles/components/Chat.scss'
 
 const Chat = ({user}) => {
     const [messages, setMessages] = useState([])
+    const [songs, setSongs] = useState([])
 
     const [inputValue, setInputValue] = useState('')
 
-    useEffect(() => {
-        const messageList = [
-            'das', 'asdf', 'asdf'
-        ]
+    const createMessagesList = (songs) => {
+        const messageList = []
 
-        setMessages(messageList)
-    }, [])
+        for (let song of songs) {
+            messageList.push(song.track.name)
+        }
+
+        return messageList
+    }
+
+    useEffect(() => {
+        setSongs(user.songs)
+
+        if (songs) {
+            const messageList = createMessagesList(songs)
+            setMessages(messageList)
+        }
+    }, [user, songs])
 
     return (
         <article>
