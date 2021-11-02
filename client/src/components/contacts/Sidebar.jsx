@@ -1,7 +1,7 @@
 import React from 'react'
 
 import Contactslist from './ContactsList'
-import SearchInput from './SearchInput'
+import SearchInput from './SearchBox'
 
 const Sidebar = () => {
     return (

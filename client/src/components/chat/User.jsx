@@ -11,11 +11,8 @@ import '../../styles/components/User.scss'
 
 const User = () => {
     const history = useHistory()
-
     const { id } = useParams()
-
     const [currentUser, setCurrentUser] = useState()
-
     const [userOnPage, setUserOnPage] = useState({})
 
     const getCurrentUser = useCallback(async () => {
