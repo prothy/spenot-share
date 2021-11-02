@@ -8,6 +8,8 @@ const Chat = ({user}) => {
     const [messages, setMessages] = useState([])
     const [songs, setSongs] = useState([])
 
+    const [loading, setLoading] = useState(false)
+
     const [inputValue, setInputValue] = useState('')
 
     const createMessagesList = (songs) => {
@@ -23,20 +25,21 @@ const Chat = ({user}) => {
     useEffect(() => {
         setSongs(user.songs)
 
-        if (songs) {
+        if (songs || loading) {
             const messageList = createMessagesList(songs)
             setMessages(messageList)
+            setLoading(false)
         }
-    }, [user, songs])
+    }, [user, songs, loading])
 
     return (
         <article>
             <section className="msg-list">
                 {messages.map(e => <Message content={e} />)}
+                {loading ? 'Loading...' : ''}
             </section>
             <div className="chat-input">
-                <SongInput val={{inputValue, setInputValue}} />
-                <button className="btn">Send</button>
+                <SongInput inputState={{inputValue, setInputValue}} msgState={{messages, setMessages}}/>
             </div>
         </article>
     )
