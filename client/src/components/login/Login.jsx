@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Header from './Header.jsx'
+import Header from '../Header'
 
-import '../styles/components/Login.scss'
+import '../../styles/components/Login.scss'
 import LoginButton from './LoginButton'
 
 const Login = () => {

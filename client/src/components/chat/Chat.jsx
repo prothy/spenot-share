@@ -1,8 +1,8 @@
 import React, {useState, useEffect } from 'react'
-import Message from './Message.jsx'
-import SongInput from './SongInput.jsx'
+import Message from './Message'
+import SongInput from './SongInput'
 
-import '../styles/components/Chat.scss'
+import '../../styles/components/Chat.scss'
 
 const Chat = ({user}) => {
     const [messages, setMessages] = useState([])

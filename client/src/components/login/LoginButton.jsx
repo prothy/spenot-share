@@ -1,6 +1,6 @@
 import React from 'react'
 
-import '../styles/components/LoginButton.scss'
+import '../../styles/components/LoginButton.scss'
 
 const LoginButton = () => {
     // TODO: use websockets to open in new tab

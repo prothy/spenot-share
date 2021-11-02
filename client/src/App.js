@@ -7,8 +7,8 @@ import {
 
 import './styles/App.scss'
 
-import Login from './components/Login.jsx'
-import User from './components/User.jsx'
+import Login from './components/login/Login'
+import User from './components/chat/User'
 
 function App() {
     return (

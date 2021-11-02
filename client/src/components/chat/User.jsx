@@ -2,12 +2,12 @@ import React, {useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { useParams } from 'react-router-dom'
 
-import Header from './Header.jsx'
-import ChatHeader from './ChatHeader.jsx'
-import Sidebar from './Sidebar.jsx'
+import Header from '../Header'
+import ChatHeader from './ChatHeader'
+import Sidebar from '../contacts/Sidebar'
 import Chat from './Chat'
 
-import '../styles/components/User.scss'
+import '../../styles/components/User.scss'
 
 const User = () => {
     const history = useHistory()
