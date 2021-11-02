@@ -1,6 +1,8 @@
 # Spenot share
 
-This is a work-in-progress app where you will be able to share songs on Spotify with others, by posting it on their wall, which in return will update an automatically generated playlist. I had an ugly, but working test version that used Pug as a templating engine, however I decided to completely replace the front-end with React. It is not done yet, therefore this repo is simply to show what I'm currently working on without an actually presentable version just yet.
+This is a work-in-progress app where you will be able to share songs on Spotify with others, by posting it on their wall, which in return will update an automatically generated playlist. I had an ugly, but working test version that used Pug as a templating engine, however I decided to completely replace the front-end with React. 
+
+It is not done yet, however, it is functional. You are able to log into your spotify account and add songs to the playlist through the web interface, and visit any user directly through the relevant URL.
 
 I am planning to implement the following:
   - A contacts list, where you can add users by their spotify ID
